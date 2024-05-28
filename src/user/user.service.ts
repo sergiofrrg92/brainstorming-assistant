@@ -1,21 +1,25 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
-    constructor(
-        @Inject('USER_REPOSITORY')
-        private userRepository: Repository<User>,
-    ) {}
+  constructor(
+    @Inject('USER_REPOSITORY')
+    private userRepository: Repository<User>,
+  ) {}
 
-    create(createUserDto: any): string | PromiseLike<string> {
-        return "This action adds a new user";
-    }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async create(
+    createUserDto: CreateUserDto,
+  ): Promise<User | PromiseLike<User>> {
+    const newUser = this.userRepository.create(createUserDto);
+    await this.userRepository.save(newUser);
+    return newUser;
+  }
 
-    async findAll(): Promise<User[]> {
-        return this.userRepository.find();
-      }
+  async findAll(): Promise<User[]> {
+    return this.userRepository.find();
+  }
 }
-    
