@@ -10,7 +10,6 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async create(
     createUserDto: CreateUserDto,
   ): Promise<User | PromiseLike<User>> {
