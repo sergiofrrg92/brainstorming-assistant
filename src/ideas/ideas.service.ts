@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateIdeaDto } from './dto/create-idea.dto';
 import { UpdateIdeaDto } from './dto/update-idea.dto';
 import { GenerateIdeaDto } from './dto/generate-idea.dto';
-import { generateResponse } from './apis/openai.api';
+import { generateResponse } from 'src/apis/openai.api';
 
 @Injectable()
 export class IdeasService {
