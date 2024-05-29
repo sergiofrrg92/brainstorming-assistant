@@ -1,1 +1,4 @@
-export class CreateIdeaDto {}
+export class CreateIdeaDto {
+  title: string;
+  description: string;
+}

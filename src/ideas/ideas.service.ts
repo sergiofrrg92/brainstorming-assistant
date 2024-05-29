@@ -1,14 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateIdeaDto } from './dto/create-idea.dto';
 import { UpdateIdeaDto } from './dto/update-idea.dto';
 import { GenerateIdeaDto } from './dto/generate-idea.dto';
 import { generateResponse } from 'src/apis/openai.api';
+import { Idea } from './entities/idea.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class IdeasService {
+  constructor(
+    @Inject('IDEAS_REPOSITORY')
+    private ideaRepository: Repository<Idea>,
+  ) {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  create(createIdeaDto: CreateIdeaDto) {
-    return 'This action adds a new idea';
+  async create(createIdeaDto: CreateIdeaDto) {
+    const newIdea = this.ideaRepository.create(createIdeaDto);
+    await this.ideaRepository.save(newIdea);
+    return newIdea;
   }
 
   findAll() {
