@@ -26,7 +26,7 @@ export class IdeasController {
     return this.ideasService.findAll();
   }
 
-  @Get('generate')
+  @Post('generate')
   generateIdea(@Body() generateIdeaDto: GenerateIdeaDto) {
     return this.ideasService.generateIdea(generateIdeaDto);
   }
