@@ -14,8 +14,9 @@ export class UserController {
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
     console.log(createUserDto);
-    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
-    const newUser = { ...createUserDto, password: hashedPassword };
-    return this.userService.create(newUser);
+    // TODO: Move this logic to the service
+    // const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+    // const newUser = { ...createUserDto, password: hashedPassword };
+    return this.userService.create(createUserDto);
   }
 }
